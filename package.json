@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "vesper-gatsby-template",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Vesper Template For GatsbyJS",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -10,22 +10,21 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "gatsby": "^4.11.1",
+    "gatsby-plugin-image": "^2.11.1",
+    "gatsby-plugin-react-helmet": "^5.11.0",
+    "gatsby-source-filesystem": "^4.11.1",
+    "gatsby-transformer-remark": "^5.11.1",
+    "gatsby-transformer-sharp": "^4.11.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "uikit": "^3.13.7"
   },
   "devDependencies": {
     "prettier": "^2.6.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
