@@ -1,7 +1,7 @@
 build/Release
 node_modules/
 .npm
-.env*
+.env
 .cache/
 public
 
