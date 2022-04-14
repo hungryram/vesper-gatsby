@@ -1,12 +1,21 @@
-import React from "react"
+import * as React from 'react'
+import { graphql } from 'gatsby'
 
-const Home = () => {
+const Home = ({ data }) => {
 
-  return(
-    <div>
-      Home
-    </div>
-  )
+    return(
+        <>
+        
+        </>
+    )
 }
 
-export default Home
+export const pageQuery = graphql`
+  {
+    page: file(base: {eq: "_index.md"}, sourceInstanceName: {eq: "main"}){
+        id
+    }
+  }
+`
+
+export default Home;
