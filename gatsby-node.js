@@ -19,7 +19,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
 
     // Set API Auth
 
-    const authCredential = 'Basic ' + new Buffer.from(process.env.IHOMEFINDER_USERNAME + ':' + process.env.IHOMEFINDER_PASSWORD).toString('base64')
+    const authCredential = 'Basic ' + new Buffer.from(process.env.IHOMEFINDERUSERNAME + ':' + process.env.IHOMEFINDERPASSWORD).toString('base64')
     const requestOptions = {
     'method': 'GET',
     'headers': {
@@ -30,7 +30,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
 
     // Fetch Listings Data
 
-    const listingsEndpoint = process.env.IHOMEFINDER_ENDPOINT
+    const listingsEndpoint = process.env.IHOMEFINDERENDPOINT
 
     const fetchListings = async () => {
         const listingsResponse = await fetch(listingsEndpoint, requestOptions)
