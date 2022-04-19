@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
 import { useSiteData } from '../../hooks'
+import Social from '../templates/social'
 
 const Navbar = () => {
 
@@ -301,7 +302,7 @@ const mainMenu = menu.data.menu
 
                         <li className="uk-nav-header"></li>
 
-                        {/* Add Social Component */}
+                        <Social/>
 
                     </ul>
                 </div>
