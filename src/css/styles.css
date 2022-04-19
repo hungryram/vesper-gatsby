@@ -1,3 +1,5 @@
+@import 'uikit/dist/css/uikit.min.css';
+
 /* TYPOGRAPHY */
 
 body h1,
@@ -268,6 +270,10 @@ div.uk-sticky.uk-sticky-below.uk-sticky-fixed.undefined .white-logo,
 
 .uk-navbar-sticky .dark-logo {
     display: block;
+}
+
+.dark-logo {
+    display:none;
 }
 
 /* FORM */

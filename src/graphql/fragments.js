@@ -4,6 +4,7 @@ export const appearanceYamlFragment = graphql`
   fragment AppearanceYaml on DataYaml {
       branding {
         site_title
+        logo
         dark_logo
         favicon
         logo_width

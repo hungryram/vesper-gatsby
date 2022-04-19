@@ -2,6 +2,7 @@ const typeDefs =`
 
     type Branding {
         site_title: String
+        logo: String
         dark_logo: String
         favicon: String
         logo_width: Int
@@ -146,7 +147,7 @@ const typeDefs =`
         realtor_logo: Boolean
         enable_black_text: Boolean
         remove_credit: Boolean
-        menu: BaseMenu
+        menu: [BaseMenu]
         company_name: String
         social_media: SocialMedia
         contact_information: ProfileContact

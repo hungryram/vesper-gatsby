@@ -1,6 +1,6 @@
 import React from "react"
-import 'uikit/dist/css/uikit.min.css';
-import 'uikit/dist/js/uikit.min.js';
+import 'uikit/dist/js/uikit.min.js'
+import 'uikit/dist/js/uikit-icons.js'
 import './src/css/styles.css'
 import Navbar from "./src/components/globals/navbar";
 import Helmet from "react-helmet";
@@ -8,7 +8,7 @@ import { useSiteData } from "./src/hooks";
 
 const EmbedData = () => {
 
-    const { appearance } = useSiteData()
+    const { appearance, developer } = useSiteData()
     const colors = appearance.data.colors
 
     return (        
@@ -23,6 +23,7 @@ const EmbedData = () => {
                     --idx-title-text-color: ${colors.idx_title_text_color};
                 `}
             </style>
+            {developer.data.custom_css}
         </Helmet>
     )
 }
