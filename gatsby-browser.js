@@ -8,6 +8,19 @@ import Helmet from "react-helmet";
 import { useSiteData } from "./src/hooks";
 import Footer from "./src/components/globals/footer";
 
+const mybutton = document.getElementById("scroll-top");
+    
+window.onscroll = function() { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+
 const UIKitWrapper = ({ children }) => {
     React.useEffect(() => {
         uikitMin.use(uikitIcons)
@@ -46,7 +59,6 @@ const EmbedData = () => {
 
             {/* --- FONTS --- */}
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
-            
         </Helmet>
     )
 }
@@ -59,6 +71,7 @@ export const wrapPageElement = ({ element }) => {
             <Navbar/>
             {element}
             <Footer/>
+            <a id="scroll-top" title="Top" data-uk-totop href="#totop" data-uk-scroll></a>
         </UIKitWrapper>
     )
 }
