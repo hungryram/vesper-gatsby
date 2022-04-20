@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import { useSiteData } from '../../hooks'
+import { Site } from '../../context'
 import Social from '../templates/social'
 
 const Navbar = () => {
 
-const { appearance, profile, menu } = useSiteData()
+    const site = React.useContext(Site)
 
-const navbar = appearance.data.branding
-const navColor = appearance.data.header 
-const navContact = profile.data.contact_information 
-const headerSocial = profile.data.social_media 
-const mainMenu = menu.data.menu
+    const profile = site.profile
+    const navbar = site.appearance.branding
+    const navColor = site.appearance.header 
+    const navContact = profile.contact_information 
+    const mainMenu = site.menu.menu
 
     return(
 

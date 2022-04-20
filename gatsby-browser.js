@@ -5,7 +5,7 @@ import uikitIcons from "uikit/dist/js/uikit-icons.js"
 import './src/css/styles.css'
 import Navbar from "./src/components/globals/navbar";
 import Helmet from "react-helmet";
-import { useSiteData } from "./src/hooks";
+import { Site, SiteProvider } from "./src/context"
 import Footer from "./src/components/globals/footer";
 
 const mybutton = document.getElementById("scroll-top");
@@ -33,9 +33,10 @@ const UIKitWrapper = ({ children }) => {
 
 const EmbedData = () => {
 
-    const { appearance, developer, profile } = useSiteData()
-    const colors = appearance.data.colors
-    const seo = profile.data.search_engine_optimization
+    const site = React.useContext(Site)
+
+    const colors = site.appearance.colors
+    const seo = site.profile.search_engine_optimization
 
     return (        
         <Helmet>
@@ -55,7 +56,7 @@ const EmbedData = () => {
             <meta name="twitter:creator" content={seo.twitter_card.twitter_username} />
 
             {/* --- CUSTOM CSS --- */}
-            {developer.data.custom_css}
+            {site.developer.custom_css}
 
             {/* --- FONTS --- */}
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
@@ -67,11 +68,13 @@ export const wrapPageElement = ({ element }) => {
 
     return(
         <UIKitWrapper>
-            <EmbedData/>
-            <Navbar/>
-            {element}
-            <Footer/>
-            <a id="scroll-top" title="Top" data-uk-totop href="#totop" data-uk-scroll></a>
+            <SiteProvider>
+                <EmbedData/>
+                <Navbar/>
+                {element}
+                <Footer/>
+                <a id="scroll-top" title="Top" data-uk-totop href="#totop" data-uk-scroll></a>
+            </SiteProvider>
         </UIKitWrapper>
     )
 }

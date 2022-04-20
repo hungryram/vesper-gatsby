@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { useSiteData } from '../../hooks'
+import { Site } from '../../context'
 
 const Social = () => {
 
-    const { profile } = useSiteData()
-    const companySocial = profile.data.social_media 
+    const site = React.useContext(Site)
+    const companySocial = site.profile.social_media
     
     return(
 
-        <div class="social_icons">
+        <div className="social_icons">
             {companySocial.facebook ?
                 <a href={companySocial.facebook} className="uk-icon-button uk-margin-small-right" data-uk-icon="icon: facebook; ratio: .8" target="_blank" rel="noreferrer"/>
             : null}

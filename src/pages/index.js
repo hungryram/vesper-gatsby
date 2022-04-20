@@ -1,12 +1,17 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { Site } from '../context'
 
 const Home = ({ data }) => {
 
-    return(
-        <>
+  const site = React.useContext(Site)
+
+  return(
+
+      <>
         
-        </>
+      </>
+      
     )
 }
 

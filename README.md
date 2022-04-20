@@ -11,13 +11,14 @@
 - IDX listing images downloaded / cached with remote node files created for use with Gatsby Image API
 
 **Site Data**
-- YAML data transformed to nodes and imported into components via graphQL static query
+- YAML data transformed to nodes
+- YAML node data passed to components via React Context
 
 **Pages**
 - Page data fetched using graphQL page query from ID passed via page context
 - "Single" pages created programatically via Gatsby Node API with markup sourced from template files in 'src/pageTemplates/[parentFolder].single.js'
 
 **Misc**
-- Layouts folder is now Components & files only created for partials
+- Layouts folder is now Components
 - Page links created with Gatsby Link API for prefetching content
 - CSS folder moved in /src directory

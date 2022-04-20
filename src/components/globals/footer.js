@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { useSiteData } from '../../hooks'
+import { Site } from '../../context'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import Social from '../templates/social'
 import Contact from '../templates/contact'
 
 const Footer = () => {
 
-    const { footer: footerObj, profile } = useSiteData()
+    const site = React.useContext(Site)
 
-    const companyName = profile.data.company_name
-    const footer = footerObj.data 
-    const footerContact = profile.data.contact_information 
-    const footerSocial = profile.data.social_media
+    const profile = site.profile
+    const companyName = profile.company_name
+    const footer = site.footer 
+    const footerContact = profile.contact_information 
     const date = new Date 
 
     const legalPages = useStaticQuery(graphql`
@@ -142,9 +142,9 @@ const Footer = () => {
                             <ul className="hr-legals uk-padding-remove uk-text-center">
                                 {legalPages ?
                                     <>
-                                        {legalPages.allSitePage.nodes.map((page) => {
+                                        {legalPages.allSitePage.nodes.map((page, i) => {
                                             return(
-                                                <li className="uk-display-inline uk-margin-medium-right">
+                                                <li key={i} className="uk-display-inline uk-margin-medium-right">
                                                     <small>
                                                         <Link to={page.path}>{page.pageContext.childMarkdownRemark__frontmatter__title}</Link>
                                                     </small>
