@@ -1,12 +1,10 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { useSiteData } from '../../hooks'
+import { Site } from '../../context'
 
 const BlogTemplate = ({ data }) => {
 
-    const site = useSiteData()
-
-    console.log(site, data)
+    const site = React.useContext(Site)
 
     return(
         <>

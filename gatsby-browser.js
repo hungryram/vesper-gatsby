@@ -8,18 +8,6 @@ import Helmet from "react-helmet";
 import { Site, SiteProvider } from "./src/context"
 import Footer from "./src/components/globals/footer";
 
-const mybutton = document.getElementById("scroll-top");
-    
-window.onscroll = function() { scrollFunction() };
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
-    }
-}
-
 
 const UIKitWrapper = ({ children }) => {
     React.useEffect(() => {
@@ -72,8 +60,7 @@ export const wrapPageElement = ({ element }) => {
                 <EmbedData/>
                 <Navbar/>
                 {element}
-                <Footer/>
-                <a id="scroll-top" title="Top" data-uk-totop href="#totop" data-uk-scroll></a>
+                <Footer/>          
             </SiteProvider>
         </UIKitWrapper>
     )

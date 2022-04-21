@@ -113,7 +113,7 @@ const Footer = () => {
                                     </>
                                 : null}
                                 <li>
-                                    <small data-cms-options='{"image": false}' class="editable">
+                                    <small data-cms-options='{"image": false}' className="editable">
                                         The data and information contained within this website are for informational purposes. We try our best to keep all information up-to-date but encourage visitors to do their own research to determine the accuracy of material available on this website. While we strive to keep the information accurate, we do not warrant the accuracy or completeness of the information, text, graphics, links, or other items contained within these materials. Please visit our full disclaimer for more information.
                                     </small>
                                 </li>

@@ -17,7 +17,6 @@ const SiteProvider = ({ children }) => {
         <Site.Provider value={{ appearance, profile, developer, footer, menu }}>
             {children}
         </Site.Provider>
-
     )
 }
 

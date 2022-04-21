@@ -1,5 +1,5 @@
 ---
-body: View Client reviews here
+body: <p>View Client reviews here</p>
 layout: testimonials
 search_engine_optimization:
   meta_description: Our clients put their trust in our team

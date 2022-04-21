@@ -15,7 +15,7 @@ const Navbar = () => {
 
     return(
 
-        <>
+        <div className="uk-position-top full-nav-wrapper" style={{zIndex: 100}}>
             <div 
                 className="uk-visible@m"
                 uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky uk-dark; cls-inactive: uk-navbar-transparent; top: 200"
@@ -131,7 +131,7 @@ const Navbar = () => {
                                                         </div>
                                                     </>
                                                 :
-                                                    <Link to={menuItem.link}>
+                                                    <Link to={menuItem.link ? menuItem.link : '#'}>
                                                         {menuItem.name}
                                                     </Link>
                                                 }
@@ -227,14 +227,14 @@ const Navbar = () => {
                                                 {menuItem.menu.map((subMenu, i) => {
                                                     return(
                                                         <li key={i} className="uk-active">
-                                                            <Link to={subMenu.link}>{subMenu.name}</Link>
+                                                            <Link to={subMenu.link ? subMenu.link : '#'}>{subMenu.name}</Link>
                                                         </li>
                                                     )
                                                 })}               
                                             </ul>
                                         </>
                                     :
-                                        <Link key={i} to={menuItem.link}>
+                                        <Link key={i} to={menuItem.link ? menuItem.link : '#'}>
                                             {menuItem.name}
                                         </Link>
                                     }
@@ -307,8 +307,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-        </>
-
+        </div>
     )
 }
 

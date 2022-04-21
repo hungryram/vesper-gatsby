@@ -1,10 +1,7 @@
 ---
 home_sections:
 - _type: text-and-image-section
-  body: |-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit varius suscipit. Nullam ullamcorper nunc in diam tempor, non malesuada leo sollicitudin. Sed lorem nulla, tincidunt tempor libero vitae, dignissim porttitor justo. Curabitur ornare neque quis nibh commodo porta. Pellentesque eleifend a dui vel lobortis. Donec sit amet nibh ut nulla.
-
-    Proin mattis leo et nunc euismod fringilla. Etiam dignissim a sapien ac sagittis.Curabitur ornare neque quis nibh commodo porta. Pellentesque eleifend a dui vel lobortis. Donec sit amet nibh ut nulla ullamcorper rutrum.&nbsp;
+  body: <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit varius suscipit. Nullam ullamcorper nunc in diam tempor, non malesuada leo sollicitudin. Sed lorem nulla, tincidunt tempor libero vitae, dignissim porttitor justo. Curabitur ornare neque quis nibh commodo porta. Pellentesque eleifend a dui vel lobortis. Donec sit amet nibh ut nulla.</p><p>Proin mattis leo et nunc euismod fringilla. Etiam dignissim a sapien ac sagittis.Curabitur ornare neque quis nibh commodo porta. Pellentesque eleifend a dui vel lobortis. Donec sit amet nibh ut nulla ullamcorper rutrum.</p>
   button: Get in Touch
   button_link: /contact
   heading: About Our Team
@@ -13,8 +10,8 @@ home_sections:
   image_width: 400
   template: text-and-image
 - _type: active-listings-carousel
-  body: You can add in listings manually within the admin or connect your website
-    to your MLS board.
+  body: <p>You can add in listings manually within the admin or connect your website
+    to your MLS board.</p>
   heading: Featured Listings
   template: active-listings
 - _type: featured-boxes
@@ -28,11 +25,11 @@ home_sections:
   - heading: Multi-Family
     image: /uploads/slider1.jpg
     link: /properties/multi-family/
-  body: Create multiple panels for use on featuring communities, properties, and more.
+  body: <p>Create multiple panels for use on featuring communities, properties, and more.</p>
   heading: Display Featured Panels
   template: featured-boxes
 - _type: team-carousel
-  body: Lorem ipsum dolor sit amet, consectetur adipisicing elit
+  body: <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
   heading: Meet Our Agents
   template: home-agent
 slideshow:
