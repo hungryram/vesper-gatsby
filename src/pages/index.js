@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { Link, graphql } from 'gatsby'
-import { Site } from '../context'
 import slugify from 'slugify'
-import Hero from '../components/home/hero'
-import PropertyCard from '../components/templates/propertyCard'
+import Hero from '../components/home/Hero'
+import PropertyCard from '../components/templates/PropertyCard'
 
-const Home = ({ data }) => {
+const Home = ({ data: { appearance: appearanceData, page: pageData, testimonials: testimonialData, agents: agentData, blog: blogData, activeListings: activeListingData } }) => {
 
-  const site = React.useContext(Site)
-  const page = data.page.childMarkdownRemark.frontmatter
+  const appearance = appearanceData.data
+  const page = pageData.childMarkdownRemark.frontmatter
 
   return(
 
@@ -22,7 +21,6 @@ const Home = ({ data }) => {
           { page.home_sections ?
             <>
               {page.home_sections.map((section, i) => {
-                console.log(section)
                 if(section.template === 'featured-idx-listings'){
                   return(
                     <div key={i} className="uk-section uk-section-small">
@@ -39,7 +37,7 @@ const Home = ({ data }) => {
                 }
                 
                 if(section.template === 'home-testimonial'){
-                  const testimonials = data.testimonials.childMarkdownRemark.frontmatter.testimonials
+                  const testimonials = testimonialData.childMarkdownRemark.frontmatter.testimonials
                   return(
                     <div key={i} className="uk-section">
                       <div className="uk-container uk-container-large">           
@@ -85,7 +83,7 @@ const Home = ({ data }) => {
                 }
 
                 if(section.template === 'home-agent'){
-                  const agents = data.agents.nodes
+                  const agents = agentData.nodes
                   return(
                     <div key={i} className="uk-section">
                       <div className="uk-container uk-container-large">
@@ -146,7 +144,7 @@ const Home = ({ data }) => {
                 }
 
                 if(section.template === 'home-blog'){
-                  const blogPosts = data.blog.nodes
+                  const blogPosts = blogData.nodes
                   return(
                     <div key={i} className="uk-section">
                       <div className="uk-container uk-container-large">
@@ -300,8 +298,8 @@ const Home = ({ data }) => {
                                 <div className="uk-width-1-1">
                                   <button className="uk-button uk-button-primary">Send Email</button>
                                 </div>
-                                { site.appearance.form.form_disclaimer ?
-                                  <div className="uk-width-1-1 md-content" dangerouslySetInnerHTML={{ __html: site.appearance.form.form_disclaimer }}/>
+                                { appearance.form.form_disclaimer ?
+                                  <div className="uk-width-1-1 md-content" dangerouslySetInnerHTML={{ __html: appearance.form.form_disclaimer }}/>
                                 : null } 
                               </form>
                             </div>
@@ -313,7 +311,7 @@ const Home = ({ data }) => {
                 }
 
                 if(section.template === 'active-listings'){
-                  const listings = data.activeListings.nodes
+                  const listings = activeListingData.nodes
                   return(
                     <div className="uk-section">
                       <div className="uk-container uk-container-large">
@@ -334,7 +332,7 @@ const Home = ({ data }) => {
                                     return(
                                       <li key={i}>
                                         <Link to={`/listings/${slugify(listing.markdown.frontmatter.title, { lower: true })}`}>
-                                          <PropertyCard site={site} listing={listing} />
+                                          <PropertyCard appearance={appearance} listing={listing} />
                                         </Link>
                                       </li>
                                     )
@@ -343,8 +341,8 @@ const Home = ({ data }) => {
                               : null }
                             </ul>
                             <a className="uk-position-center-left uk-position-small" href="#" data-uk-slidenav-previous
-                              uk-slider-item="previous"></a>
-                            <a className="uk-position-center-right uk-position-small" href="#" data-uk-slidenav-next uk-slider-item="next"></a>
+                              data-uk-slider-item="previous"></a>
+                            <a className="uk-position-center-right uk-position-small" href="#" data-uk-slidenav-next data-uk-slider-item="next"></a>
                           </div>
                           <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
                         </div>
@@ -441,6 +439,21 @@ export const pageQuery = graphql`
         ...ListingMarkdown
       }
     },
+    appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
+      ...AppearanceData
+    },
+    developer: file(base: {eq: "developer.yml"}, sourceInstanceName: {eq: "data"}) {
+        ...DeveloperData
+    },
+    footer: file(base: {eq: "footer.yml"}, sourceInstanceName: {eq: "data"}) {
+        ...FooterData
+    },
+    menu: file(base: {eq: "menu.yml"}, sourceInstanceName: {eq: "data"}) {
+        ...MenuData
+    },
+    profile: file(base: {eq: "profile.yml"}, sourceInstanceName: {eq: "data"}) {
+        ...ProfileData
+    }
   }
 `
 

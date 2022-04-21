@@ -1,8 +1,7 @@
 import * as React from 'react'
 
-const PropertyCard = ({ site, listing: listingData }) => {
-
-    const buttonColor = site.appearance.colors
+const PropertyCard = ({ appearance, listing: listingData }) => {
+    
     const listing = listingData.markdown.frontmatter
     const cardImage = listing.photos.gallery[0].image
 
@@ -26,7 +25,7 @@ const PropertyCard = ({ site, listing: listingData }) => {
                                     {listing.status ?
                                         <span 
                                             className="status uk-badge" 
-                                            style={listing.status === 'Sold' ? {background: `#d10000`} : { background: buttonColor.button_background_color, color: buttonColor.button_text_color }}
+                                            style={listing.status === 'Sold' ? {background: `#d10000`} : { background: `${appearance.colors.button_background_color}`, color: `${appearance.colors.button_text_color}`}}
                                         >
                                             {listing.status}
                                         </span> 

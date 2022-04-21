@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { useSiteData } from '../../hooks'
 
-const Contact = () => {
+const Contact = ({ site }) => {
 
-    const { profile } = useSiteData()
-    const footerContact = profile.data.contact_information
+    const profile = site.profile.data
+    const footerContact = profile.contact_information
 
     return(
 

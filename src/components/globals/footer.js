@@ -1,16 +1,16 @@
 import * as React from 'react'
-import { Site } from '../../context'
+import { useSiteData } from '../../hooks'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import Social from '../templates/social'
-import Contact from '../templates/contact'
+import Social from '../templates/Social'
+import Contact from '../templates/Contact'
 
 const Footer = () => {
 
-    const site = React.useContext(Site)
+    const site = useSiteData()
 
-    const profile = site.profile
+    const profile = site.profile.data
     const companyName = profile.company_name
-    const footer = site.footer 
+    const footer = site.footer.data 
     const footerContact = profile.contact_information 
     const date = new Date 
 
@@ -58,7 +58,7 @@ const Footer = () => {
                                     : null}
                                 </ul>
                                 <div className="accent">
-                                    <Social/>
+                                    <Social site={site}/>
                                 </div>
                             </div>
                             <div>
@@ -66,7 +66,7 @@ const Footer = () => {
                                     Contact
                                 </h2>
                                 <ul className="uk-list">
-                                    <Contact/>
+                                    <Contact site={site}/>
                                 </ul>
                             </div>
                             <div>

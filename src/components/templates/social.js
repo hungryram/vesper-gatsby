@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { Site } from '../../context'
 
-const Social = () => {
+const Social = ({ site }) => {
 
-    const site = React.useContext(Site)
-    const companySocial = site.profile.social_media
+    const companySocial = site.profile.data.social_media
     
     return(
 

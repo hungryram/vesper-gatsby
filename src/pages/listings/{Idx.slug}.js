@@ -1,10 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { Site } from '../../context'
 
 const IdxTemplate = ({ data }) => {
-
-    const site = React.useContext(Site)
 
     return(
         <>

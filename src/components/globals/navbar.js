@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import { Site } from '../../context'
-import Social from '../templates/social'
+import { useSiteData } from '../../hooks'
+import Social from '../templates/Social'
 
 const Navbar = () => {
 
-    const site = React.useContext(Site)
+    const site = useSiteData()
 
-    const profile = site.profile
-    const navbar = site.appearance.branding
-    const navColor = site.appearance.header 
+    const profile = site.profile.data
+    const navbar = site.appearance.data.branding
+    const navColor = site.appearance.data.header 
     const navContact = profile.contact_information 
-    const mainMenu = site.menu.menu
+    const mainMenu = site.menu.data.menu
 
     return(
 
@@ -302,7 +302,7 @@ const Navbar = () => {
 
                         <li className="uk-nav-header"></li>
 
-                        <Social/>
+                        <Social site={site}/>
 
                     </ul>
                 </div>

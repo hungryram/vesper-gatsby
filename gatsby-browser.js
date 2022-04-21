@@ -3,10 +3,10 @@ import 'uikit/dist/js/uikit.min'
 import uikitMin from "uikit/dist/js/uikit.min.js"
 import uikitIcons from "uikit/dist/js/uikit-icons.js"
 import './src/css/styles.css'
-import Navbar from "./src/components/globals/navbar";
-import Helmet from "react-helmet";
-import { Site, SiteProvider } from "./src/context"
-import Footer from "./src/components/globals/footer";
+import { useSiteData } from "./src/hooks"
+import { Helmet } from "react-helmet";
+import Navbar from "./src/components/globals/Navbar";
+import Footer from "./src/components/globals/Footer";
 
 
 const UIKitWrapper = ({ children }) => {
@@ -21,10 +21,10 @@ const UIKitWrapper = ({ children }) => {
 
 const EmbedData = () => {
 
-    const site = React.useContext(Site)
+    const site = useSiteData()
 
-    const colors = site.appearance.colors
-    const seo = site.profile.search_engine_optimization
+    const colors = site.appearance.data.colors
+    const seo = site.profile.data.search_engine_optimization
 
     return (        
         <Helmet>
@@ -55,13 +55,19 @@ const EmbedData = () => {
 export const wrapPageElement = ({ element }) => {
 
     return(
-        <UIKitWrapper>
-            <SiteProvider>
-                <EmbedData/>
-                <Navbar/>
+        <>    
+            <Navbar/>
                 {element}
-                <Footer/>          
-            </SiteProvider>
+            <Footer/>          
+        </>
+    )
+}
+
+export const wrapRootElement = ({ element }) => {
+    return(
+        <UIKitWrapper>
+            <EmbedData/>
+            {element}
         </UIKitWrapper>
     )
 }
