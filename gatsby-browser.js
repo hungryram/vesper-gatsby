@@ -5,8 +5,7 @@ import uikitIcons from "uikit/dist/js/uikit-icons.js"
 import './src/css/styles.css'
 import { useSiteData } from "./src/hooks"
 import { Helmet } from "react-helmet";
-import Navbar from "./src/components/globals/Navbar";
-import Footer from "./src/components/globals/Footer";
+import Layout from "./src/components/globals/Layout";
 
 
 const UIKitWrapper = ({ children }) => {
@@ -53,13 +52,10 @@ const EmbedData = () => {
 }
 
 export const wrapPageElement = ({ element }) => {
-
-    return(
-        <>    
-            <Navbar/>
-                {element}
-            <Footer/>          
-        </>
+    return(  
+        <Layout>
+            {element}
+        </Layout>          
     )
 }
 
