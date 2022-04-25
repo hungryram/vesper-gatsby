@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fetch = require('node-fetch');
-const { createRemoteFileNode } = require("gatsby-source-filesystem");
+const { createRemoteFileNode, createFilePath } = require("gatsby-source-filesystem");
 const slugify = require('slugify');
 const typeDefs = require('./src/graphql/typeDefs');
 
@@ -110,6 +110,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
             createNode({
               ...listing,
               id: listing._id,
+              slug: listing.slug,
               parent: null,
               children: [],
               internal: {
@@ -149,10 +150,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Listing Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'listings' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-listing`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
@@ -166,10 +169,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Blog Post Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'blog' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-blog`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
@@ -183,10 +188,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Legal Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'legal' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-legal`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
@@ -200,10 +207,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Offices Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'offices' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-offices`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
@@ -217,10 +226,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Team Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'our-team' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-team`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
@@ -234,10 +245,12 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
     // Generate Partners Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'partners' && node.base !== '_index.md'){
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
         createNode({
             ...markdownNode,
             id: `${node.id}-partners`,
+            slug: slug,
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
