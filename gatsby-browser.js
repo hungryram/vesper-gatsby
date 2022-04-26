@@ -1,7 +1,8 @@
 import * as React from "react"
-import 'uikit/dist/js/uikit.min'
+import 'uikit/dist/css/uikit.min.css';
 import uikitMin from "uikit/dist/js/uikit.min.js"
 import uikitIcons from "uikit/dist/js/uikit-icons.js"
+
 import './src/css/styles.css'
 import { useSiteData } from "./src/hooks"
 import { Helmet } from "react-helmet";

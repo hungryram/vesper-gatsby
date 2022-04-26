@@ -1,6 +1,6 @@
 menu:
   - name: Home
-    link:
+    link: /
     menu:
   - name: Buyers
     link:
