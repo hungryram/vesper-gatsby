@@ -1,5 +1,6 @@
 import * as React from "react"
-import "uikit/dist/js/uikit.min.js"
+import 'uikit/dist/css/uikit.min.css';
+import 'uikit/dist/js/uikit.min.js';
 
 import './src/css/styles.css'
 import { useSiteData } from "./src/hooks"
