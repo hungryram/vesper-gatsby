@@ -6,8 +6,10 @@ import PageSidebar from '../../components/templates/PageSidebar'
 
 const BlogTemplate = ({ data }) => {
 
+    const isBrowser = typeof window !== "undefined"
+
     let url;
-    if(window !== 'undefined'){
+    if(isBrowser){
         url = window.location.href
     }
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link } from 'gatsby'
 import PageSidebar from './PageSidebar'
 
-const BlogList = ({ posts, size, appearance }) => {
+const BlogList = ({ posts, size }) => {
 
     return(
 
