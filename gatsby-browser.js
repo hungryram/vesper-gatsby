@@ -1,7 +1,5 @@
 import * as React from "react"
-import 'uikit/dist/css/uikit.min.css';
-import uikitMin from "uikit/dist/js/uikit.min.js"
-import uikitIcons from "uikit/dist/js/uikit-icons.js"
+import "uikit/dist/js/uikit.min.js"
 
 import './src/css/styles.css'
 import { useSiteData } from "./src/hooks"
@@ -9,14 +7,7 @@ import { Helmet } from "react-helmet";
 import Layout from "./src/components/globals/Layout";
 
 
-const UIKitWrapper = ({ children }) => {
-    React.useEffect(() => {
-        uikitMin.use(uikitIcons)
-    })
-    return(
-        <>{children}</>
-    )
-}
+
 
 
 const EmbedData = () => {
@@ -57,14 +48,5 @@ export const wrapPageElement = ({ element }) => {
         <Layout>
             {element}
         </Layout>          
-    )
-}
-
-export const wrapRootElement = ({ element }) => {
-    return(
-        <UIKitWrapper>
-            <EmbedData/>
-            {element}
-        </UIKitWrapper>
     )
 }

@@ -2,6 +2,7 @@ module.exports = {
   plugins: [
     `gatsby-transformer-yaml`,
     `gatsby-transformer-remark`,
+    `gatsby-plugin-netlify`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
