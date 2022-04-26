@@ -7,7 +7,7 @@ const Hero = ({ slideshow, slideshowSettings, videoBackground }) => {
         <>
             {videoBackground.video_link ?
                 <div className="uk-cover-container uk-flex uk-flex-middle uk-flex-center" data-uk-height-viewport>
-                    <video src={videoBackground.video_link} defaultmuted autoplay loop muted playsinline data-uk-cover/>
+                    <video src={videoBackground.video_link} defaultMuted autoplay loop muted playsinline data-uk-cover/>
                     <div className="black-overlay"/>
                     <div className="uk-position-center">
                         <div className="uk-section-small">

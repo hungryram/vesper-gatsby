@@ -163,7 +163,55 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
                 content: JSON.stringify(markdownNode),
                 contentDigest: createContentDigest(markdownNode)
             },
-        })  
+        }) 
+        // Create Cities Nodes
+        if(markdownNode.frontmatter.cities){
+            const slug = slugify(markdownNode.frontmatter.cities, { lower: true })
+            createNode({
+                id: `city-${slug}`,
+                slug: slug,
+                city: markdownNode.frontmatter.cities,
+                parent: markdownNode.id,
+                children: [],
+                internal: {
+                    type: 'City',
+                    content: JSON.stringify(markdownNode.frontmatter.cities),
+                    contentDigest: createContentDigest(markdownNode.frontmatter.cities)
+                },
+            })  
+        }
+        // Create Zip Code Nodes
+        if(markdownNode.frontmatter.zip_codes){
+            const slug = slugify(markdownNode.frontmatter.zip_codes, { lower: true })
+            createNode({
+                id: `zipcode-${slug}`,
+                slug: slug,
+                zipcode: markdownNode.frontmatter.zip_codes,
+                parent: markdownNode.id,
+                children: [],
+                internal: {
+                    type: 'Zipcode',
+                    content: JSON.stringify(markdownNode.frontmatter.zip_codes),
+                    contentDigest: createContentDigest(markdownNode.frontmatter.zip_codes)
+                },
+            })  
+        }
+        // Create Property Nodes
+        if(markdownNode.frontmatter.properties){
+            const slug = slugify(markdownNode.frontmatter.properties, { lower: true })
+            createNode({
+                id: `property-${slug}`,
+                slug: slug,
+                property: markdownNode.frontmatter.properties,
+                parent: markdownNode.id,
+                children: [],
+                internal: {
+                    type: 'Property',
+                    content: JSON.stringify(markdownNode.frontmatter.properties),
+                    contentDigest: createContentDigest(markdownNode.frontmatter.properties)
+                },
+            })  
+        }
     }
 
     // Generate Blog Post Nodes
@@ -183,6 +231,42 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
                 contentDigest: createContentDigest(markdownNode)
             },
         })  
+        // Generate Category Nodes
+        if(markdownNode.frontmatter.categories){
+            markdownNode.frontmatter.categories.forEach((category) => {
+                const slug = slugify(category, { lower: true })
+                createNode({
+                    id: `category-${slug}`,
+                    slug: slug,
+                    category: category,
+                    parent: markdownNode.id,
+                    children: [],
+                    internal: {
+                        type: 'Category',
+                        content: JSON.stringify(category),
+                        contentDigest: createContentDigest(category)
+                    },
+                })  
+            })
+        }
+        // Generate Tag Nodes
+        if(markdownNode.frontmatter.tags){
+            markdownNode.frontmatter.tags.forEach((tag) => {
+                const slug = slugify(tag, { lower: true })
+                createNode({
+                    id: `tag-${slug}`,
+                    slug: slug,
+                    tag: tag,
+                    parent: markdownNode.id,
+                    children: [],
+                    internal: {
+                        type: 'Tag',
+                        content: JSON.stringify(tag),
+                        contentDigest: createContentDigest(tag)
+                    },
+                })  
+            })
+        }
     }
 
     // Generate Legal Nodes
@@ -260,7 +344,5 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
             },
         })  
     }
-
+ 
 }
-
-
