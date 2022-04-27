@@ -357,6 +357,42 @@ const typeDefs =`
         frontmatter: MarkdownRemarkFrontmatter
         html: String
     }
+
+    type IdxDetails {
+        description: String
+        squareFeet: String
+        bedrooms: String
+        fullBathrooms: String
+        partialBathrooms: String
+        latitude: String
+        longitude: String
+    }
+
+    type IdxImage {
+        _id: String
+        image: String
+        order: String
+    }
+
+    type IdxPhotos {
+        gallery: [IdxImage]
+    }
+
+    type Idx implements Node {
+        _id: String
+        _type: String
+        title: String
+        slug: String
+        cities: String
+        states: String
+        zip_codes: String
+        listing_agent: String
+        status: String
+        price: String
+        details: IdxDetails
+        photos: IdxPhotos
+    }
+
 `
 
 module.exports = typeDefs

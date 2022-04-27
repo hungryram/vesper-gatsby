@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const PropertyCard = ({ appearance, listing: listingData }) => {
     
-    const listing = listingData.markdown.frontmatter
+    const listing = listingData
     const cardImage = listing.photos.gallery[0].image
 
     return(

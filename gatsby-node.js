@@ -54,7 +54,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
     }
 
     let listings = [];
-
+  
     await Promise.all(listingEndpoints.map(async (endpoint) => {
         const data = await fetchData(endpoint)
         const photosEndpoint = data.photos.links.filter(link => link.rel === 'self').map(e => e.href).toString()
@@ -62,43 +62,34 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
         const photoData = await Promise.all(photoArray.results.map(async (result) => {
             const photoEndpoint = result.links.filter(link => link.rel === 'self').map(e => e.href).toString()
             const data = await fetchData(photoEndpoint)
-            const photoObj = { _id: data.id, url: data.largeImageUrl, order: data.displayOrder }
+            const photoObj = { _id: data.id, image: data.largeImageUrl, order: data.displayOrder }
             return photoObj
         }))
         const photos = photoData.map(photo => (photo))
         const slug = slugify(`${data.address.houseNumber}-${data.address.streetName}`, { lower: true })
         const listing = {
             _id: data.id,
+            _type: 'IDX',
+            title: `${data.address.houseNumber} ${data.address.streetName}`,
             slug: slug,
-            dateImported: data.dateImported,
-            boardId: data.boardId,
-            listingNumber: data.listingNumber,
-            listingAgent: data.listingAgent,
-            listingOffice: data.listingOffice, 
-            listingStatus: data.listingStatusDisplay,
+            cities: data.address.city,
+            states: data.address.state,
+            zip_codes: data.address.postalCode,
+            listing_agent: data.listingAgent,
+            status: data.status,
+            price: data.listPrice,
             details: {
-                listPrice: data.listPrice,
-                status: data.status,
                 description: data.description,
                 squareFeet: data.squareFeet,
                 bedrooms: data.bedrooms,
                 fullBathrooms: data.fullBathrooms,
                 partialBathrooms: data.partialBathrooms,
+                latitude: data.latitude,
+                longitude: data.longitude,
             },
-            location: {
-                address: {
-                    houseNumber: data.address.houseNumber,
-                    streetName: data.address.streetName,
-                    city: data.address.city,
-                    state: data.address.state,
-                    postalCode: data.address.postalCode,
-                },
-                geo: {
-                    latitude: data.latitude,
-                    longitude: data.longitude,
-                },
+            photos: {
+                gallery: photos,
             },
-            imageData: photos,
         }
         listings.push(listing)
     }))
@@ -114,7 +105,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
               parent: null,
               children: [],
               internal: {
-                type: `IDX`,
+                type: `Idx`,
                 content: JSON.stringify(listing),
                 contentDigest: createContentDigest(listing)
               }
@@ -130,10 +121,10 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
 
     // Create Remote Image Files for IDX Listing Images
 
-    if(node.internal.type === 'IDX') {
-        node.imageData.map(image =>
+    if(node.internal.type === 'Idx') {
+        node.photos.gallery.map(image =>
           createRemoteFileNode({
-            url: image.url,
+            url: image.image,
             parentNodeId: node.id,
             store,
             cache,
@@ -142,7 +133,7 @@ exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, c
             createNodeId: id => image._id,
           })
           .catch(err => {
-            console.log(`Error fetching remote image -- \n Listing: ${node.location.address.houseNumber}-${node.location.address.streetName} \n Source: ${image.url}`)
+            console.log(`Error fetching remote image -- \n Listing: ${node.houseNumber}-${node.streetName} \n Source: ${image.image}`)
           })
         )
       } 

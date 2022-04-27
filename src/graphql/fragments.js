@@ -1,5 +1,36 @@
 import { graphql } from "gatsby"
 
+export const idxFragment = graphql`
+  fragment IdxData on Idx {
+    _id
+    _type
+    title
+    slug
+    cities
+    states
+    zip_codes
+    listing_agent
+    status
+    price
+    details {
+      description
+      squareFeet
+      bedrooms
+      fullBathrooms
+      partialBathrooms
+      latitude
+      longitude
+    }
+    photos {
+      gallery {
+        _id
+        image
+        order
+      }
+    }
+  }
+`
+
 export const appearanceYamlFragment = graphql`
   fragment AppearanceYaml on DataYaml {
       branding {
