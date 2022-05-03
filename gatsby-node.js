@@ -4,7 +4,7 @@ const { createRemoteFileNode, createFilePath } = require("gatsby-source-filesyst
 const slugify = require('slugify');
 const typeDefs = require('./src/graphql/typeDefs');
 
- // Define Markdown YAML Schema Types
+ // Define Schema Types
 
  exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
@@ -53,6 +53,12 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
         return data;
     }
 
+    const formatPrice = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+    });
+
     let listings = [];
   
     await Promise.all(listingEndpoints.map(async (endpoint) => {
@@ -67,6 +73,8 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
         }))
         const photos = photoData.map(photo => (photo))
         const slug = slugify(`${data.address.houseNumber}-${data.address.streetName}`, { lower: true })
+        const status = data.status.charAt(0).toUpperCase() + data.status.slice(1)
+        const price = formatPrice.format(data.listPrice)
         const listing = {
             _id: data.id,
             _type: 'IDX',
@@ -76,8 +84,8 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
             states: data.address.state,
             zip_codes: data.address.postalCode,
             listing_agent: data.listingAgent,
-            status: data.status,
-            price: data.listPrice,
+            status: status,
+            price: price,
             details: {
                 description: data.description,
                 squareFeet: data.squareFeet,
@@ -96,9 +104,12 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
 
     // Create IDX Listing Source Nodes
 
+    
+
     if(listings.length > 0) {
-        listings.forEach((listing) => {
-            createNode({
+
+        listings.forEach(async(listing) => {
+            await createNode({
               ...listing,
               id: listing._id,
               slug: listing.slug,
@@ -110,49 +121,81 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
                 contentDigest: createContentDigest(listing)
               }
             })
-          })
+        })
     }
-
 }
 
-exports.onCreateNode = async ({node, getNode, actions, store, cache, getCache, createContentDigest }) => {
+exports.onCreateNode = async ({node, getNode, createNodeId, actions, store, cache, getCache, createContentDigest }) => {
 
-    const { createNode } = actions;
+    const { createNode, createNodeField } = actions;
 
-    // Create Remote Image Files for IDX Listing Images
+    if(node.internal.type === 'Idx'){
 
-    if(node.internal.type === 'Idx') {
-        node.photos.gallery.map(image =>
-          createRemoteFileNode({
-            url: image.image,
-            parentNodeId: node.id,
-            store,
-            cache,
-            getCache,
-            createNode,
-            createNodeId: id => image._id,
-          })
-          .catch(err => {
-            console.log(`Error fetching remote image -- \n Listing: ${node.houseNumber}-${node.streetName} \n Source: ${image.image}`)
-          })
-        )
-      } 
+        if(node.photos.gallery){
+            let imageNodes = []
+            await Promise.all(node.photos.gallery.map(async (image) => {
+                const imageNode = await createRemoteFileNode({
+                    url: image.image,
+                    parentNodeId: node.id,
+                    store,
+                    cache,
+                    getCache,
+                    createNode,
+                    createNodeId,
+                })
+                .catch(err => {
+                    console.log(`Error fetching image file from source: ${image.image} for listing: ${node.title}. The image file likely no longer exists at the source URL.`)
+                })
+                if(imageNode){
+                    imageNodes.push(imageNode)
+                }
+            }))
+            if(imageNodes){
+              const filterNodes = imageNodes.filter(imageNode => imageNode.id);
+              const orderNodes = filterNodes.sort((a, b) => {
+                  let dateA = new Date(a.birthtime)
+                  let dateB = new Date(b.birthtime)
+                return dateA - dateB;
+              });
+              createNodeField({
+                  node,
+                  name: 'photos___NODE',
+                  value: orderNodes.map(imageNode => imageNode.id),
+              })
+              createNodeField({
+                  node,
+                  name: 'featuredImage___NODE',
+                  value: orderNodes[0].id,
+              })
+            }
+        }
+    }
 
     // Generate Listing Nodes
 
     if(node.internal.type === 'File' && node.sourceInstanceName === 'listings' && node.base !== '_index.md'){
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         const markdownNode = await getNode(node.children[0])
+        let images = []
+        if(markdownNode.frontmatter.photos?.gallery){
+            markdownNode.frontmatter.photos.gallery.map((gallery => {
+                const imagePath = `../../static${gallery.image}`
+                images.push(imagePath)
+            }))
+        }
         createNode({
             ...markdownNode,
             id: `${node.id}-listing`,
+            _type: 'User Listing',
             slug: slug,
+            photos: images,
+            featuredImage: images[0],
             parent: node.id,
             children: [`${markdownNode.id}`],
             internal: {
                 type: 'Listing',
                 content: JSON.stringify(markdownNode),
-                contentDigest: createContentDigest(markdownNode)
+                contentDigest: createContentDigest(markdownNode)      
             },
         }) 
         // Create Cities Nodes

@@ -1,0 +1,26 @@
+{
+  "additional_links": [
+    {
+      "link": "/",
+      "name": "Home"
+    },
+    {
+      "name": "Search Listings",
+      "link": "/listings"
+    },
+    {
+      "name": "Contact",
+      "link": "/contact/"
+    }
+  ],
+  "footer_background_color": "#232733",
+  "background_image": "https://res.cloudinary.com/hungryram19/image/upload/v1605403006/templates/realestate2/clean-living-room_b3bubn.jpg",
+  "logo": null,
+  "logo_width": null,
+  "equal_housing_logo": true,
+  "mls_logo": true,
+  "realtor_logo": true,
+  "enable_black_text": false,
+  "remove_credit": false,
+  "important_documents": null
+}

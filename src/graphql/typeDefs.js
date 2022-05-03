@@ -124,37 +124,6 @@ const typeDefs =`
         twitter_card: TwitterCard
     }
 
-    type DataYaml implements Node {
-        branding: Branding
-        icons: Icons
-        header: Header
-        pages: Pages
-        page_sidebar: PageSidebar
-        colors: Colors
-        search_field: SearchField
-        form: Form
-        column_size: String
-        custom_css: String
-        custom_script: String
-        custom_closing_script: String
-        additional_links: [AdditionalLink]
-        footer_background_color: String
-        background_image: String
-        logo: String
-        logo_width: Int
-        equal_housing_logo: Boolean
-        mls_logo: Boolean
-        realtor_logo: Boolean
-        enable_black_text: Boolean
-        remove_credit: Boolean
-        menu: [BaseMenu]
-        company_name: String
-        social_media: SocialMedia
-        contact_information: ProfileContact
-        search_engine_optimization: ProfileSEO
-        important_documents: String
-    }
-
     type Block {
         heading: String
         image: String

@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Link, graphql } from 'gatsby'
+import appearance from '../../data/appearance.json'
 import slugify from 'slugify'
 import Hero from '../components/home/Hero'
 import PropertyCard from '../components/templates/PropertyCard'
 
-const Home = ({ data: { appearance: appearanceData, page: pageData, testimonials: testimonialData, agents: agentData, blog: blogData, activeListings: activeListingData } }) => {
+const Home = ({ data: { page: pageData, testimonials: testimonialData, agents: agentData, blog: blogData, activeListings: activeListingData } }) => {
 
-  const appearance = appearanceData.data
   const page = pageData.childMarkdownRemark.frontmatter
 
   return(
@@ -439,21 +439,6 @@ export const pageQuery = graphql`
         ...ListingMarkdown
       }
     },
-    appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
-      ...AppearanceData
-    },
-    developer: file(base: {eq: "developer.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...DeveloperData
-    },
-    footer: file(base: {eq: "footer.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...FooterData
-    },
-    menu: file(base: {eq: "menu.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...MenuData
-    },
-    profile: file(base: {eq: "profile.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...ProfileData
-    }
   }
 `
 

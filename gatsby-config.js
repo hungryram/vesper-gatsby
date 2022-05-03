@@ -1,19 +1,11 @@
 module.exports = {
   plugins: [
-    `gatsby-transformer-yaml`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-netlify`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: `${__dirname}/data`
-      }
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

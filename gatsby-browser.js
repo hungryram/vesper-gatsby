@@ -3,7 +3,9 @@ import 'uikit/dist/css/uikit.min.css';
 import uikitMin from "uikit/dist/js/uikit.min.js"
 import uikitIcons from "uikit/dist/js/uikit-icons.js"
 import './src/css/styles.css'
-import { useSiteData } from "./src/hooks"
+import profile from './data/profile.json'
+import appearance from './data/appearance.json'
+import developer from './data/developer.json'
 import { Helmet } from "react-helmet";
 import Layout from "./src/components/globals/Layout";
 
@@ -20,10 +22,8 @@ const UIKitWrapper = ({ children }) => {
 
 const EmbedData = () => {
 
-    const site = useSiteData()
-
-    const colors = site.appearance.data.colors
-    const seo = site.profile.data.search_engine_optimization
+    const colors = appearance.colors
+    const seo = profile.search_engine_optimization
 
     return (        
         <Helmet>
@@ -43,7 +43,7 @@ const EmbedData = () => {
             <meta name="twitter:creator" content={seo.twitter_card.twitter_username} />
 
             {/* --- CUSTOM CSS --- */}
-            {site.developer.custom_css}
+            {developer.custom_css}
 
             {/* --- FONTS --- */}
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>

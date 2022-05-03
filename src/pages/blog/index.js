@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby';
+import appearance from '../../../data/appearance.json'
+import developer from '../../../data/developer.json'
 import PageHeader from '../../components/templates/PageHeader';
 import BlogList from '../../components/templates/BlogList';
 
@@ -7,8 +9,8 @@ const BlogIndex = ({ data }) => {
 
     return(
         <>
-            <PageHeader data={{page: data.page.childMarkdownRemark.frontmatter, appearance: data.appearance.data }} />
-            <BlogList posts={data.blog.nodes} size={data.developer.data} appearance={data.appearance.data} />
+            <PageHeader data={{page: data.page.childMarkdownRemark.frontmatter, appearance: appearance }} />
+            <BlogList posts={data.blog.nodes} size={developer} appearance={appearance} />
 
         </>
     )
@@ -44,13 +46,7 @@ export const pageQuery = graphql`
                 excerpt
             }
         }
-    },
-    developer: file(base: {eq: "developer.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...DeveloperData
-    },
-    appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
-        ...AppearanceData
-      }
+    }
 }
 `
 

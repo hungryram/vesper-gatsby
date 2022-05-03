@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { Link, graphql } from 'gatsby'
+import appearance from '../../../data/appearance.json'
+import developer from '../../../data/developer.json'
 import PageHeader from '../../components/templates/PageHeader'
 import Share from '../../components/templates/Share'
 import PageSidebar from '../../components/templates/PageSidebar'
@@ -15,11 +17,11 @@ const BlogTemplate = ({ data }) => {
 
     return(
         <>
-            <PageHeader data={{page: data.blog.markdown.frontmatter, appearance: data.appearance.data}} />     
+            <PageHeader data={{page: data.blog.markdown.frontmatter, appearance: appearance}} />     
             <div className="uk-section">
                 <div className="uk-container uk-container-large">
                     <div className="uk-grid-small" data-uk-grid>
-                        <div className={`uk-width-${data.developer.data.column_size}`}>
+                        <div className={`uk-width-${developer.column_size}`}>
                             {data.blog.markdown.frontmatter.featured_image ?
                                 <div className="uk-margin-medium">
                                     <img src={data.blog.markdown.frontmatter.featured_image} alt={data.blog.markdown.frontmatter.image_alt_tag} />
@@ -76,12 +78,6 @@ export const pageQuery = graphql`
                 excerpt
             }
         },
-        developer: file(base: {eq: "developer.yml"}, sourceInstanceName: {eq: "data"}) {
-            ...DeveloperData
-        },
-        appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
-            ...AppearanceData
-          },
         categories: allCategory {
             nodes{
                 category

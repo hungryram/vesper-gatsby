@@ -1,8 +1,9 @@
 import * as React from 'react'
+import profile from '../../../data/profile.json'
 
-const Social = ({ site }) => {
+const Social = () => {
 
-    const companySocial = site.profile.data.social_media
+    const companySocial = profile.social_media
     
     return(
 

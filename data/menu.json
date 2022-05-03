@@ -1,0 +1,77 @@
+{
+  "menu": [
+    {
+      "name": "Home",
+      "link": "/",
+      "menu": null
+    },
+    {
+      "name": "Buyers",
+      "link": null,
+      "menu": [
+        {
+          "name": "Featured Listings",
+          "link": "/listings",
+          "menu": null
+        },
+        {
+          "name": "Search MLS",
+          "link": "https://search.idxhome.com/homesearch/132970",
+          "menu": null
+        }
+      ]
+    },
+    {
+      "name": "Sellers",
+      "link": null,
+      "menu": [
+        {
+          "name": "Home Valuation",
+          "link": "/home-valuation/",
+          "menu": null
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "link": null,
+      "menu": [
+        {
+          "name": "Testimonials",
+          "link": "/testimonials/",
+          "menu": null
+        },
+        {
+          "name": "Blog",
+          "link": "/blog",
+          "menu": null
+        },
+        {
+          "name": "Press",
+          "link": "/press",
+          "menu": null
+        },
+        {
+          "name": "Partners",
+          "link": "/partners",
+          "menu": null
+        },
+        {
+          "name": "Our Offices",
+          "link": "/offices",
+          "menu": null
+        },
+        {
+          "name": "Our Team",
+          "link": "/our-team",
+          "menu": null
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "link": "/contact",
+      "menu": null
+    }
+  ]
+}

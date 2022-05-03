@@ -1,22 +1,22 @@
 import * as React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
-const PropertyCard = ({ appearance, listing: listingData }) => {
+const PropertyCard = ({ appearance, listing: listingData, image }) => {
     
     const listing = listingData
-    const cardImage = listing.photos.gallery[0].image
 
     return(
-
         <div className="uk-card uk-card-default property-card">
             <div className="uk-card-media-top">
                 <div className="uk-cover-container">
-                    <canvas height="300"></canvas>
-                    {cardImage ?
-                        
-                        <img src={cardImage} alt={listing.title} data-uk-cover/>
+                    { image ?
+                        <GatsbyImage image={image} style={{height: 300}} />
                     :
-                        <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="no house icon" data-uk-cover/>
-                    }
+                        <>
+                            <canvas height="300"></canvas>
+                            <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/no-house-photo.jpg" alt="no house icon" data-uk-cover/>
+                        </>                
+                    }          
                     <div className="property-card-overlay uk-position-cover"/>
                     <div className="uk-position-absolute property-card-details">
                         <div className="uk-text-center uk-light" data-uk-grid>
@@ -58,25 +58,25 @@ const PropertyCard = ({ appearance, listing: listingData }) => {
             </div>
             <div>
                 <footer className="card-footer">
-                    {listing.details.bedrooms ?
+                    {listing.details?.bedrooms ?
                         <span className="card-footer-item">
                             <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813824/Resources/realestate-assets/bed_black_24dp.svg" alt="bed icon" width="20"/>
                             <span className="uk-margin-small-left">{listing.details.bedrooms} Beds</span>
                         </span>
                     : null }
-                    {listing.details.bathrooms ?
+                    {listing.details?.bathrooms ?
                         <span className="card-footer-item">
                             <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/shower_black_24dp.svg" alt="shower icon" width="20"/>
                             <span className="uk-margin-small-left">{listing.details.bathrooms} Baths</span>
                         </span>
                     : null }
-                    {listing.details.square_footage ?
+                    {listing.details?.square_footage ?
                         <span className="card-footer-item">
                             <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/square_foot_black_24dp.svg" alt="square footage" width="20"/>
                             <span className="uk-margin-small-left">{listing.details.square_footage} Beds</span>
                         </span>
                     : null }
-                    {listing.details.garage ?
+                    {listing.details?.garage ?
                         <span className="card-footer-item">
                             <img src="https://res.cloudinary.com/hungryram19/image/upload/v1645813822/Resources/realestate-assets/garage_black_24dp.svg" alt="garage icon" width="20"/>
                             <span className="uk-margin-small-left">{listing.details.garage} Garage</span>

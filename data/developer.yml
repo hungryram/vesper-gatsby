@@ -1,9 +1,0 @@
-column_size: 2-3@m
-custom_css: |-
-  <style>
-  div.hero-overlay {
-      background: rgba(69 69 69 / 30%);
-  }
-  </style>
-custom_script:
-custom_closing_script:

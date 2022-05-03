@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import appearance from '../../../data/appearance.json'
 
 const PageSidebar = () => {
 
@@ -34,13 +35,9 @@ const PageSidebar = () => {
                  }
              }
          },
-         appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
-           ...AppearanceData
-         },
       }
     `)
 
-    const appearance = data.appearance.data 
     const buttonColor = appearance.colors
 
     return(

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import appearance from '../../../data/appearance.json'
 import PageHeader from '../../components/templates/PageHeader'
 import PropertyCard from '../../components/templates/PropertyCard'
 
@@ -23,20 +24,29 @@ const ListingIndex = () => {
               }
             }
           },
-          appearance: file(base: {eq: "appearance.yml"}, sourceInstanceName: {eq: "data"}) {
-            ...AppearanceData
-          },
           idxListings: allIdx {
               nodes {
                   ...IdxData
+                  fields {
+                      featuredImage {
+                          childImageSharp {
+                              gatsbyImageData
+                          }
+                      }
+                  }
               }
           },
           userListings: allListing {
               nodes {
-                  ...ListingMarkdown
-                  slug
+                ...ListingMarkdown
+                slug
+                featuredImage {
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
               }
-          }
+          }    
         }
     `)
 
@@ -44,7 +54,7 @@ const ListingIndex = () => {
 
     return(
         <>
-            <PageHeader data={{page: data.page.childMarkdownRemark.frontmatter, appearance: data.appearance.data }} />
+            <PageHeader data={{page: data.page.childMarkdownRemark.frontmatter, appearance: appearance }} />
             <div className="uk-section uk-section-small" style={{paddingBottom: '0'}}>
                 <div className="uk-container">
                     <div className="editable md-content">
@@ -57,7 +67,7 @@ const ListingIndex = () => {
                     className="uk-container uk-container-xlarge"
                     data-uk-scrollspy="cls: uk-animation-slide-bottom-small; target: .uk-card;"
                 >
-                    <div data-uk-filter={`target: .js-filter;animation: ${data.appearance.search_field?.filter_animation}`}>
+                    <div data-uk-filter={`target: .js-filter;animation: ${appearance.search_field?.filter_animation}`}>
                         <ul className="js-filter uk-child-width-1-2@s uk-child-width-1-3@m uk-text-center" data-uk-grid>
                             {listings ?
                                 <>
@@ -76,7 +86,8 @@ const ListingIndex = () => {
                                                 <Link to={`/listings/${listing.slug}`}>
                                                     <PropertyCard
                                                         listing={listing}
-                                                        appearance={data.appearance.data}
+                                                        appearance={appearance}
+                                                        image={listing.fields.featuredImage.childImageSharp.gatsbyImageData}
                                                     />
                                                 </Link>
                                             </li>
@@ -95,8 +106,9 @@ const ListingIndex = () => {
                                             >
                                             <Link to={`/listings${listing.slug}`}>
                                                 <PropertyCard
+                                                    image={listing.featuredImage.childImageSharp.gatsbyImageData}
                                                     listing={listing.markdown.frontmatter}
-                                                    appearance={data.appearance.data}
+                                                    appearance={appearance}
                                                 />
                                             </Link>
                                         </li>

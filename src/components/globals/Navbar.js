@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-import { useSiteData } from '../../hooks'
+import profile from '../../../data/profile.json'
+import appearance from '../../../data/appearance.json'
+import menu from '../../../data/menu.json'
 import Social from '../templates/Social'
 
 const Navbar = () => {
 
-    const site = useSiteData()
-
-    const profile = site.profile.data
-    const navbar = site.appearance.data.branding
-    const navColor = site.appearance.data.header 
+    const navbar = appearance.branding
+    const navColor = appearance.header 
     const navContact = profile.contact_information 
-    const mainMenu = site.menu.data.menu
+    const mainMenu = menu.menu
 
     return(
 
@@ -302,7 +301,7 @@ const Navbar = () => {
 
                         <li className="uk-nav-header"></li>
 
-                        <Social site={site}/>
+                        <Social/>
 
                     </ul>
                 </div>

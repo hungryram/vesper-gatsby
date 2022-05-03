@@ -1,8 +1,8 @@
 import * as React from 'react'
+import profile from '../../../data/profile.json'
 
-const Contact = ({ site }) => {
+const Contact = () => {
 
-    const profile = site.profile.data
     const footerContact = profile.contact_information
 
     return(
